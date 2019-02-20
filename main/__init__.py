@@ -1,9 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-
+# from flask_marshmallow import Marshmallow
+# ma = Marshmallow(app)
 
 app = Flask(__name__)
+
 
 POSTGRES = {
     'user': 'admin',
@@ -26,4 +28,6 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
 
-from main import routes
+from main import user_routes
+from main import ad_routes
+from main.schemas import *
