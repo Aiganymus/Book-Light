@@ -8,7 +8,7 @@ class UserSchema(Schema):
     imageFile = fields.Str()
     password = fields.Str(load_only=True)
     phoneNumber = fields.Str(required=True)
-    # ads = fields.Nested(AdSchema, many=True)
+    ads = fields.Nested('AdSchema', many=True, exclude=('userId', ))
 
 
 class PayingTypeSchema(Schema):
@@ -20,12 +20,11 @@ class AdSchema(Schema):
     id = fields.Int(dump_only=True)
     title = fields.Str(required=True)
     description = fields.Str(required=True)
-    posted_at = fields.DateTime(dump_only=True)
-    # userId = fields.Nested(UserSchema, only=['id'])
-    # images = fields.Nested(ImageSchema, many=True)
+    datePosted = fields.DateTime(dump_only=True)
     userId = fields.Int()
+    images = fields.Nested('ImageSchema', many=True)
     payingTypes = fields.Nested(PayingTypeSchema, many=True)
-
+    books = fields.Nested('BookSchema', many=True)
 
 
 class ImageSchema(Schema):
@@ -44,7 +43,7 @@ class BookSchema(Schema):
     id = fields.Int(dump_only=True)
     title = fields.Str(required=True)
     price = fields.Int()
-    adId = fields.Nested(AdSchema, only=['id'])
+    adId = fields.Int()
 
 
 
