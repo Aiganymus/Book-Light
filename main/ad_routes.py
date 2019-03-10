@@ -55,7 +55,7 @@ def create_ad(current_user):
     key = new_book.title.lower()  # key fo redis list
     value = json.dumps(ad_schema.dump(new_ad))  # from json to string
     r.lpush(key, value)  # push to the head of list
-    r.ltrim(key, 0, 9) # leave only 10 ads
+    r.ltrim(key, 0, 9)  # leave only 10 ads
 
     db.session.commit()
 
